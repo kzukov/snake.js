@@ -1,6 +1,7 @@
 ![snake.js](./assets/snake.gif)
+
 # snake.js
-Snake.js is a multiplayer game built on Node.JS and WebGL.
+snake.js is a multiplayer game built on Node.JS and WebGL.
 
 # Recommendation
 
@@ -16,7 +17,7 @@ For the best game experience with your friends, your ping should not be higher t
 ```sh
 git clone https://github.com/kzukov/snake.js.git
 npm install
-npm run
+npm start
 ```
 
 # Config
