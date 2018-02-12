@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Snake.js</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="/styles.css">
+	<script type="text/javascript" src="script.js" defer></script>
+</head>
+
+<body>
+
+	<div id="main">
+		<canvas id="canvas" height="600" width="720"></canvas>
+		<div>
+			SCORE: <span id="score"></span>
+		</div>
+		<div class="grayout">
+			Latency: <span id="latency"></span> ms
+		</div>
+
+		<div id="debug">
+			<button id="debug_toggle">Debug info</button>
+			<div id="debug_inner" style="display: none;">
+				<div class="grayout">
+			Tick rate: <span id="tick_rate"></span>
+			</div>
+			<div class="grayout">
+				FPS: <span id="fps_counter"></span>
+			</div>
+			<div class="grayout">
+				Food: <span id="food_counter">0</span> pieces
+			</div>
+			<div class="grayout">
+				Server CPU time: <span id="cpu_time"></span> ms
+			</div>
+			<div class="grayout">
+				Bytes received: <span id="bytes_received">0</span> (unzipped)
+			</div>
+			<div class="grayout">
+				Bytes sent: <span id="bytes_sent">0</span> (unzipped)
+			</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+#main {
+  margin: 0 auto;
+  width: 720px;
+}
+
+html,
+body {
+  background: black;
+  color: #fff;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.grayout {
+  color: #666;
+  font-size: 14px;
+}
+
+#debug {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+
+}
+
+#debug_toggle {
+  border: 2px solid #fff;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#debug_inner {
+  margin-top: 12px;
+  box-sizing: border-box;
+  background: rgba(0,0,0,.5)
+}
+
+.pull_right {
+  float:right;
+}
