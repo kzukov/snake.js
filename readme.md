@@ -4,7 +4,7 @@ Snake.js is a multiplayer game built on Node.JS and WebGL.
 
 # Recommendation
 
-For best experience with your friends your ping should not be higher than 40 ms, what is approximately 1400 km from you and server.
+For the best game experience with your friends, your ping should not be higher than 40 ms, what is approximately 1400 km from you and server.
 
 # Controls
 
