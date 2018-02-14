@@ -28,7 +28,7 @@
     "ws://" +
       (location.hostname == "localhost"
         ? location.hostname
-        : "46.101.195.248") +
+        : "159.89.104.149") +
       ":" +
       location.port || 80
   );
