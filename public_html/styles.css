@@ -3,8 +3,7 @@
   width: 720px;
 }
 
-html,
-body {
+html, body {
   background: black;
   color: #fff;
   font-family: arial;
@@ -21,7 +20,6 @@ body {
   position: fixed;
   top: 12px;
   left: 12px;
-
 }
 
 #debug_toggle {
@@ -34,9 +32,9 @@ body {
 #debug_inner {
   margin-top: 12px;
   box-sizing: border-box;
-  background: rgba(0,0,0,.5)
+  background: rgba(0, 0, 0, .5)
 }
 
 .pull_right {
-  float:right;
+  float: right;
 }

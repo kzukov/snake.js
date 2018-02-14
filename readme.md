@@ -3,7 +3,13 @@
 ## snake.js
 snake.js is a multiplayer game built on Node.JS and WebGL.
 
-## Recommendation
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+
+## Demo
+
+Demo is available [here](http://159.89.104.149/).
+
+## Deploy recommendation
 
 For the best game experience with your friends, your ping should not be higher than 40 ms, what is approximately 1400 km from you and server.
 
@@ -23,9 +29,3 @@ npm start
 ## Config
 
 **config.json** can be found in root directory.
-
-## Bugs (to be fixed in future)
-
-- Food can be spawned on snake model
-- Snake can be spawned on another snake
-- Supports only 60 Hz monitors

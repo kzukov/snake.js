@@ -3,7 +3,6 @@
     "canvas",
     "score",
     "latency",
-    "cpu_time",
     "bytes_received",
     "bytes_sent",
     "tick_rate",
@@ -129,7 +128,6 @@
           score.innerHTML = session.score;
         }
 
-        cpu_time.innerHTML = object.p;
         tick_rate.innerHTML = object.r;
         food_counter.innerHTML = food.x.length;
 

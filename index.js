@@ -8,8 +8,6 @@ const WebSocket = require("ws");
 
 var interval;
 
-const { performance } = require("perf_hooks");
-
 var express = require("express");
 var app = express();
 
@@ -133,8 +131,6 @@ interval = setInterval(tick, 1000 / config.tick);
 var eat = false;
 
 function tick(ws) {
-  performance.mark("A");
-
   var buffer = [];
 
   wss.clients.forEach(function(client) {
@@ -332,11 +328,6 @@ function tick(ws) {
     compressed_food.y.push(position.y);
   });
 
-  performance: performance.mark("B");
-  performance.measure("A to B", "A", "B");
-  var duration = performance.getEntriesByName("A to B")[0].duration.toFixed(2);
-  performance.clearMeasures();
-
   wss.clients.forEach(function(client) {
     if (client.readyState === WebSocket.OPEN) {
       client.send(
@@ -345,7 +336,6 @@ function tick(ws) {
           s: compressed,
           f: eat ? compressed_food : client.data.frame++ ? 0 : compressed_food,
           o: client.data.score,
-          p: duration,
           r: config.tick
         })
       );
