@@ -1,15 +1,13 @@
 "use strict";
 
-const config = require("./config.json");
-
 var http = require("http");
+var express = require("express");
+var app = express();
 
 const WebSocket = require("ws");
 
 var interval;
-
-var express = require("express");
-var app = express();
+const config = require("./config.json");
 
 app.use("/", express.static(__dirname + "/public_html"));
 
@@ -51,6 +49,15 @@ function addFood() {
       break;
     }
   }
+
+  wss.clients.forEach(function(socket) {
+    if (!socket.data.snake) return;
+    socket.data.snake.forEach(function(position) {
+      if (position.x === x && position.y === y) {
+        found = true;
+      }
+    });
+  });
 
   if (found) {
     addFood();
@@ -348,9 +355,21 @@ function tick(ws) {
 }
 
 function spawn(client) {
-  var coordinate = randomNumber(20, size.width / 10 - 20);
+  var coordinates = [];
 
-  client.data.snake = [
+  wss.clients.forEach(function(socket) {
+    if (!socket.data.snake) return;
+    socket.data.snake.forEach(function(position) {
+      coordinates.push({
+        x: position.x,
+        y: position.y
+      });
+    });
+  });
+
+  var coordinate = randomNumber(10, size.width / 10 - 15);
+
+  var tmp = [
     {
       x: coordinate,
       y: coordinate
@@ -358,11 +377,28 @@ function spawn(client) {
   ];
 
   for (var i = 0; i < config.default_snake_length; i++) {
-    client.data.snake.push({
+    tmp.push({
       x: coordinate + i,
       y: coordinate
     });
   }
+
+  var collision = false;
+
+  coordinates.forEach(function(coordinate) {
+    tmp.forEach(function(position) {
+      if (position.x === coordinate.x && position.y === coordinate.y) {
+        collision = true;
+      }
+    });
+  });
+
+  if (collision) {
+    spawn(client);
+    return;
+  }
+
+  client.data.snake = tmp;
 
   client.data.direction = "right";
   client.data.last_direction = client.data.direction;

@@ -29,3 +29,7 @@ npm start
 ## Config
 
 **config.json** can be found in root directory.
+
+## Known bugs
+
+- Supports only 60 Hz monitors
