@@ -25,12 +25,7 @@
   });
 
   var socket = new WebSocket(
-    "ws://" +
-      (location.hostname == "localhost"
-        ? location.hostname
-        : "159.89.104.149") +
-      ":" +
-      location.port || 80
+    "ws://" + location.hostname + ":" + location.port || 80
   );
 
   var time;
@@ -123,10 +118,7 @@
           window.requestAnimationFrame(draw);
         }
 
-        if (session.score !== object.o) {
-          session.score = object.o;
-          score.innerHTML = session.score;
-        }
+        score.innerHTML = object.o;
 
         tick_rate.innerHTML = object.r;
         food_counter.innerHTML = food.x.length;

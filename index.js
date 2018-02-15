@@ -51,8 +51,10 @@ function addFood() {
   }
 
   wss.clients.forEach(function(socket) {
+    if (found) return;
     if (!socket.data.snake) return;
     socket.data.snake.forEach(function(position) {
+      if (found) return;
       if (position.x === x && position.y === y) {
         found = true;
       }
