@@ -7,11 +7,7 @@ snake.js is a multiplayer game built on Node.JS and WebGL.
 
 ## Demo
 
-Demo is available [here](https://kzukov.github.io/snake.js/).
-
-## Deploy recommendation
-
-For the best game experience with your friends, your ping should not be higher than 40 ms, what is approximately 1400 km from you and server.
+Demo is available [here](http://159.89.104.149/).
 
 ## Controls
 
@@ -32,4 +28,4 @@ npm start
 
 ## Known bugs
 
-- Supports only 60 Hz monitors
+- Works only on 60 Hz monitors
