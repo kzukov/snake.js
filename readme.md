@@ -5,10 +5,6 @@ snake.js is a multiplayer game built on Node.JS and WebGL.
 
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-## Demo
-
-Demo is available [here](http://159.89.104.149/).
-
 ## Controls
 
 - Move [🠝, 🠜, 🠟, 🠞] or [W, A, S, D]
