@@ -3,7 +3,8 @@
   width: 720px;
 }
 
-html, body {
+html,
+body {
   background: black;
   color: #fff;
   font-family: arial;
@@ -44,7 +45,7 @@ html, body {
 #debug_inner {
   margin-top: 12px;
   box-sizing: border-box;
-  background: rgba(0, 0, 0, .5)
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .relative {

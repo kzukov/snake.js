@@ -7,7 +7,7 @@ snake.js is a multiplayer game built on Node.JS and WebGL.
 
 ## Controls
 
-- Move [🠝, 🠜, 🠟, 🠞] or [W, A, S, D]
+- Move [W, A, S, D]
 - Boost [Space]
 - Disable/Enable animations [V]
 
@@ -21,7 +21,3 @@ npm start
 ## Config
 
 **config.json** can be found in root directory.
-
-## Known bugs
-
-- Works only on 60 Hz monitors

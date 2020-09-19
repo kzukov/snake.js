@@ -12,3 +12,9 @@
 ### Fixed
 - Food can be spawned on snake model
 - Snake can be spawned on another snake
+
+
+## [1.2.1] - 2020-19-09
+### Changed
+- Removed odometer
+- Updated README.md

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   var elements = [
     "canvas",
     "score",
@@ -9,14 +9,14 @@
     "food_counter",
     "fps_counter",
     "debug_toggle",
-    "debug_inner"
-  ].forEach(element => {
+    "debug_inner",
+  ].forEach((element) => {
     this[element] = document.getElementById(element);
   });
 
   var ctx = canvas.getContext("2d");
 
-  debug_toggle.addEventListener("click", function() {
+  debug_toggle.addEventListener("click", function () {
     if (debug_inner.style.display == "none") {
       debug_inner.style.display = "block";
     } else {
@@ -32,17 +32,17 @@
 
   var food = {
     x: [],
-    y: []
+    y: [],
   };
 
   var session = {
     id: null,
-    score: 0
+    score: 0,
   };
 
   var config = {
     food_form: "square",
-    animation: true
+    animation: true,
   };
 
   var snakes = [];
@@ -56,18 +56,18 @@
     3: "lightblue",
     4: "magenta",
     5: "lime",
-    6: "red"
+    6: "red",
   };
 
   var traffic = {
     received: 0,
-    sent: 0
+    sent: 0,
   };
 
   const size = {
     height: 600,
     width: 720,
-    step: 10
+    step: 10,
   };
 
   function send(data) {
@@ -76,18 +76,18 @@
     socket.send(string);
   }
 
-  socket.onopen = function() {
+  socket.onopen = function () {
     console.log("Connection established");
 
     time = Date.now();
 
     send({
       type: "latency",
-      time: time
+      time: time,
     });
   };
 
-  socket.onclose = function(event) {
+  socket.onclose = function (event) {
     if (event.wasClean) {
       console.log("The connection is closed cleanly");
     } else {
@@ -96,12 +96,12 @@
     console.log("Code: " + event.code + " reason: " + event.reason);
   };
 
-  setInterval(function() {
+  setInterval(function () {
     bytes_received.innerHTML = bytesToSize(traffic.received);
     bytes_sent.innerHTML = bytesToSize(traffic.sent);
   }, 1000 * 1);
 
-  socket.onmessage = function(event) {
+  socket.onmessage = function (event) {
     traffic.received += new TextEncoder("utf-8").encode(event.data).length;
 
     var object = JSON.parse(event.data);
@@ -130,11 +130,11 @@
 
         latency.innerHTML = latencyTime;
 
-        setTimeout(function() {
+        setTimeout(function () {
           time = Date.now();
           send({
             type: "latency",
-            time: time
+            time: time,
           });
         }, 1000);
 
@@ -142,7 +142,7 @@
     }
   };
 
-  socket.onerror = function(error) {
+  socket.onerror = function (error) {
     console.log("An error " + error.message);
   };
 
@@ -234,7 +234,7 @@
       }
     }
 
-    snakes.forEach(function(client) {
+    snakes.forEach(function (client) {
       var color = client.c;
 
       if (typeof color === "object") {
@@ -247,7 +247,7 @@
 
       var last = {
         x: client.x[length],
-        y: client.y[length]
+        y: client.y[length],
       };
 
       for (var i = 0; i < client.x.length; i++) {
@@ -280,13 +280,13 @@
             x: last.x,
             y: last.y,
             progress: 0,
-            direction: client.d
+            direction: client.d,
           },
           _first: {
             x: client.x[0],
             y: client.y[0],
-            animate: false
-          }
+            animate: false,
+          },
         };
       } else {
         if (parseInt(parts[client.i]._last.progress) == size.step) {
@@ -306,7 +306,7 @@
             x: last.x,
             y: last.y,
             progress: 0,
-            direction: client.d
+            direction: client.d,
           };
         }
 
@@ -320,11 +320,11 @@
           parts[client.i]._first.direction = findDirection(
             {
               x: parts[client.i]._first.x,
-              y: parts[client.i]._first.y
+              y: parts[client.i]._first.y,
             },
             {
               x: client.x[0],
-              y: client.y[0]
+              y: client.y[0],
             }
           );
 
@@ -334,11 +334,11 @@
           var tmp_direction = findDirection(
             {
               x: parts[client.i]._first.x,
-              y: parts[client.i]._first.y
+              y: parts[client.i]._first.y,
             },
             {
               x: client.x[1],
-              y: client.y[1]
+              y: client.y[1],
             }
           );
 
@@ -467,34 +467,34 @@
 
   window.requestAnimationFrame(draw);
 
-  document.addEventListener("keydown", function(event) {
+  document.addEventListener("keydown", function (event) {
     switch (event.keyCode) {
       case 37:
       case 65:
         send({
           type: "direction",
-          direction: "left"
+          direction: "left",
         });
         break;
       case 38:
       case 87:
         send({
           type: "direction",
-          direction: "up"
+          direction: "up",
         });
         break;
       case 39:
       case 68:
         send({
           type: "direction",
-          direction: "right"
+          direction: "right",
         });
         break;
       case 40:
       case 83:
         send({
           type: "direction",
-          direction: "down"
+          direction: "down",
         });
         break;
 
@@ -528,14 +528,14 @@
     }
   }
 
-  onkeydown = onkeyup = function(e) {
+  onkeydown = onkeyup = function (e) {
     if (e.keyCode === 32) {
       switch (e.type) {
         case "keydown":
           if (!boost) {
-            boost = setInterval(function() {
+            boost = setInterval(function () {
               send({
-                type: "boost"
+                type: "boost",
               });
             }, 1000 / 12);
           }

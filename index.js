@@ -15,10 +15,10 @@ var server = http.Server(app);
 
 const wss = new WebSocket.Server({
   server: server,
-  perMessageDeflate: true
+  perMessageDeflate: true,
 });
 
-server.listen(config.port, function() {
+server.listen(config.port, function () {
   console.log("Server is listening on 127.0.0.1:" + config.port);
 });
 
@@ -30,7 +30,7 @@ var food = [];
 
 var size = {
   height: 600,
-  width: 720
+  width: 720,
 };
 
 function addFood() {
@@ -50,10 +50,10 @@ function addFood() {
     }
   }
 
-  wss.clients.forEach(function(socket) {
+  wss.clients.forEach(function (socket) {
     if (found) return;
     if (!socket.data.snake) return;
-    socket.data.snake.forEach(function(position) {
+    socket.data.snake.forEach(function (position) {
       if (found) return;
       if (position.x === x && position.y === y) {
         found = true;
@@ -67,31 +67,31 @@ function addFood() {
     eat = true;
     food.push({
       x: x,
-      y: y
+      y: y,
     });
   }
 }
 
 addFood();
 
-wss.on("close", function(ws) {});
+wss.on("close", function (ws) {});
 
-wss.on("error", function(error) {
+wss.on("error", function (error) {
   console.log(error);
 });
 
 wss.on("connection", function connection(ws) {
-  ws.on("error", function() {});
+  ws.on("error", function () {});
 
   ws.data = {
     id: counter++,
     color: colors.shift(),
-    frame: 0
+    frame: 0,
   };
 
   spawn(ws);
 
-  ws.on("close", function() {
+  ws.on("close", function () {
     colors.push(ws.data.color);
   });
 
@@ -113,7 +113,7 @@ wss.on("connection", function connection(ws) {
           ws.send(
             JSON.stringify({
               t: 1,
-              d: data.time
+              d: data.time,
             })
           );
         }
@@ -142,7 +142,7 @@ var eat = false;
 function tick(ws) {
   var buffer = [];
 
-  wss.clients.forEach(function(client) {
+  wss.clients.forEach(function (client) {
     if (ws && ws.data.id !== client.data.id) {
       buffer.push(client.data);
       return;
@@ -157,12 +157,12 @@ function tick(ws) {
 
           client.data.snake.push({
             x: last.x - 1,
-            y: last.y
+            y: last.y,
           });
         } else {
           client.data.snake.push({
             x: last.x + 1,
-            y: last.y
+            y: last.y,
           });
         }
 
@@ -174,12 +174,12 @@ function tick(ws) {
 
           client.data.snake.push({
             x: last.x,
-            y: last.y - 1
+            y: last.y - 1,
           });
         } else {
           client.data.snake.push({
             x: last.x,
-            y: last.y + 1
+            y: last.y + 1,
           });
         }
 
@@ -191,12 +191,12 @@ function tick(ws) {
 
           client.data.snake.push({
             x: last.x,
-            y: last.y + 1
+            y: last.y + 1,
           });
         } else {
           client.data.snake.push({
             x: last.x,
-            y: last.y - 1
+            y: last.y - 1,
           });
         }
 
@@ -208,12 +208,12 @@ function tick(ws) {
 
           client.data.snake.push({
             x: last.x + 1,
-            y: last.y
+            y: last.y,
           });
         } else {
           client.data.snake.push({
             x: last.x - 1,
-            y: last.y
+            y: last.y,
           });
         }
 
@@ -227,7 +227,7 @@ function tick(ws) {
     if (!restore) {
       client.data.snake
         .slice(0, client.data.snake.length - 2)
-        .forEach(function(item) {
+        .forEach(function (item) {
           if (item.x === last.x && item.y === last.y) {
             restore = true;
           }
@@ -250,7 +250,7 @@ function tick(ws) {
       var remove = false;
       var tmp = [];
 
-      food.forEach(function(item, index) {
+      food.forEach(function (item, index) {
         if (item.x === last.x && item.y === last.y) {
           remove = true;
           tmp.push(index);
@@ -285,10 +285,10 @@ function tick(ws) {
 
   var collision = [];
 
-  wss.clients.forEach(function(client) {
+  wss.clients.forEach(function (client) {
     var client_last = client.data.snake[client.data.snake.length - 1];
 
-    wss.clients.forEach(function(another_client) {
+    wss.clients.forEach(function (another_client) {
       if (client.data.id !== another_client.data.id) {
         for (var i = 0; i < another_client.data.snake.length; i++) {
           if (
@@ -303,18 +303,18 @@ function tick(ws) {
     });
   });
 
-  collision.forEach(function(item) {
+  collision.forEach(function (item) {
     spawn(item);
   });
 
   var compressed = [];
 
-  buffer.forEach(function(client) {
+  buffer.forEach(function (client) {
     var tmp = {
       x: [],
       y: [],
       d: client.last_direction ? client.last_direction : client.direction,
-      i: client.id
+      i: client.id,
     };
 
     for (var b = 0; b < client.snake.length; b++) {
@@ -329,15 +329,15 @@ function tick(ws) {
 
   var compressed_food = {
     x: [],
-    y: []
+    y: [],
   };
 
-  food.forEach(function(position) {
+  food.forEach(function (position) {
     compressed_food.x.push(position.x);
     compressed_food.y.push(position.y);
   });
 
-  wss.clients.forEach(function(client) {
+  wss.clients.forEach(function (client) {
     if (client.readyState === WebSocket.OPEN) {
       client.send(
         JSON.stringify({
@@ -345,7 +345,7 @@ function tick(ws) {
           s: compressed,
           f: eat ? compressed_food : client.data.frame++ ? 0 : compressed_food,
           o: client.data.score,
-          r: config.tick
+          r: config.tick,
         })
       );
     } else {
@@ -359,12 +359,12 @@ function tick(ws) {
 function spawn(client) {
   var coordinates = [];
 
-  wss.clients.forEach(function(socket) {
+  wss.clients.forEach(function (socket) {
     if (!socket.data.snake) return;
-    socket.data.snake.forEach(function(position) {
+    socket.data.snake.forEach(function (position) {
       coordinates.push({
         x: position.x,
-        y: position.y
+        y: position.y,
       });
     });
   });
@@ -374,21 +374,21 @@ function spawn(client) {
   var tmp = [
     {
       x: coordinate,
-      y: coordinate
-    }
+      y: coordinate,
+    },
   ];
 
   for (var i = 0; i < config.default_snake_length; i++) {
     tmp.push({
       x: coordinate + i,
-      y: coordinate
+      y: coordinate,
     });
   }
 
   var collision = false;
 
-  coordinates.forEach(function(coordinate) {
-    tmp.forEach(function(position) {
+  coordinates.forEach(function (coordinate) {
+    tmp.forEach(function (position) {
       if (position.x === coordinate.x && position.y === coordinate.y) {
         collision = true;
       }
@@ -424,7 +424,7 @@ function randomDirection() {
   }
 }
 
-setInterval(function() {
+setInterval(function () {
   if (2 > food.length) {
     addFood();
   }
