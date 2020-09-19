@@ -13,7 +13,6 @@ snake.js is a multiplayer game built on Node.JS and WebGL.
 
 ## Install
 ```sh
-git clone https://github.com/kzukov/snake.js.git
 npm install
 npm start
 ```
